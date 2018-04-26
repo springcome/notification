@@ -2,16 +2,11 @@ var express = require('express');
 var app = express();
 var mysql = require('mysql');
 var con = mysql.createConnection({
-  host: "10.0.0.1",
+  host: "127.0.0.1",
   port: 3306,
-  user: "deviationnodejs",
+  user: "root",
   password: "dark4862",
-  database: "deviationnodejs",
-  // host: "127.0.0.1",
-  // port: 3306,
-  // user: "root",
-  // password: "dark4862",
-  // database: "notification",
+  database: "notification",
   connectLimit: 10,
   connectTimeout: 2000,
   canRetry: true,
