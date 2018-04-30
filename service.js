@@ -13,6 +13,8 @@ var con = mysql.createConnection({
   waitForConnections: true
 });
 
+app.use(express.static(__dirname));
+
 var router = require('./router/router') (app, con);
 
 app.set('views', __dirname + '/view');

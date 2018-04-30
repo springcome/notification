@@ -3,11 +3,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-  <style>
-    .list-user {
-      width: 500px;
-    }
-  </style>
 </head>
 <body>
   <div class="mdl-layout mdl-js-layout">
@@ -18,10 +13,10 @@
           <span class="mdl-layout__title">Notification</span>
           <div class="mdl-layout-spacer"></div>
           <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="#">Link1</a>
-            <a class="mdl-navigation__link" href="#">Link2</a>
-            <a class="mdl-navigation__link" href="#">Link3</a>
+            <a class="mdl-navigation__link" id="login_dialog" href="#">로그인</a>
+            <a class="mdl-navigation__link" id="join_dialog" href="#">가입</a>
           </nav>
+
           <div>
             <button class="mdl-button mdl-js-button mdl-button--icon" id="menu_right">
               <i class="material-icons">more_vert</i>
@@ -31,7 +26,6 @@
             </ul>
           </div>
         </div>
-
     </header>
 
     <div class="mdl-layout__drawer">

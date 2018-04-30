@@ -4,6 +4,6 @@ module.exports = function(app, con) {
       res.render('index', {
         user_list: result
       });
-    })
+    });
   });
 }
