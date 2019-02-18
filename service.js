@@ -1,21 +1,10 @@
 var express = require('express');
 var app = express();
-var mysql = require('mysql');
-var con = mysql.createConnection({
-  host: "127.0.0.1",
-  port: 3306,
-  user: "root",
-  password: "dark4862",
-  database: "notification",
-  connectLimit: 10,
-  connectTimeout: 2000,
-  canRetry: true,
-  waitForConnections: true
-});
+var fs = require('fs');
 
 app.use(express.static(__dirname));
 
-var router = require('./router/router') (app, con);
+var router = require('./router/router') (app, fs);
 
 app.set('views', __dirname + '/view');
 app.set('view engine', 'ejs');
