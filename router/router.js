@@ -12,21 +12,14 @@ connection.connect(function(error) {
 
 module.exports = function(app, fs) {
   app.get('/', function(request, response) {
-    // con.query("select * from users", function(error, result, fileds) {
-    //   res.render('index', {
-    //     user_list: result
-    //   });
-    // });
-    var sql = 'select * from users';
-    connection.query(sql, function(error, result, fileds) {
-      if (error) {
-        response.status(500);
-        response.json({success: false, message: result});
-      } else {
-        response.render('index', {
-          success: true, data: result
-        });
-      }
+    response.render('index', {
+      title: 'Lama-API'
+    });
+  });
+
+  app.get('/lotto', function(request, response) {
+    response.render('./lotto/main', {
+      title: 'Lotto'
     });
   });
 
