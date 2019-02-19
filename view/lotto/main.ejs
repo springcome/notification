@@ -8,6 +8,38 @@
       <p class="lead">...</p>
     </div>
   </div>
+  <div class="accordion" id="api-list">
+    <div class="card">
+      <div class="card-header" id="api-list-one-header">
+        <h2 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#api-list-one-content" aria-expanded="true" aria-controls="api-list-one-content">
+            Lotto first API
+          </button>
+        </h2>
+      </div>
+      <div id="api-list-one-content" class="collapse show" aria-labelledby="api-list-one-header" data-parent="#api-list">
+        <div class="card-body">
+          etc..
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" id="api-list-two-header">
+        <h2 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#api-list-two-content" aria-expanded="false" aria-controls="api-list-two-content">
+            Lotto second API
+          </button>
+        </h2>
+      </div>
+      <div id="api-list-two-content" class="collapse" aria-labelledby="api-list-two-header" data-parent="#api-list">
+        <div class="card-body">
+          etc..
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
 <% include ../common/footer.ejs %>
 </html>
