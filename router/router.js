@@ -17,6 +17,26 @@ module.exports = function(app, fs) {
     });
   });
 
+  /*****************************************
+  * User
+  *****************************************/
+  app.get('/sign_up', function(request, response) {
+    response.render('./users/sign_up');
+  });
+  app.post('/sign_up', function(request, response) {
+    var user_email = request.body.user_email;
+    var user_pwd = request.body.user_pwd;
+    var user_pwd_confirm = request.body.user_pwd_confirm;
+
+    var sql = "insert into users (user_email, user_pwd) values ?";
+    var values = [[user_email, user_pwd]];
+
+    connection.query(sql, [values], function(error, result) {
+      if (error) throw error;
+      response.redirect('/');
+    });
+  });
+
   app.get('/lotto', function(request, response) {
     response.render('./lotto/main', {
       title: 'Lotto'
