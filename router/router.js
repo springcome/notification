@@ -18,7 +18,7 @@ module.exports = function(app, fs) {
   });
 
   /*****************************************
-  * User
+  * Use
   *****************************************/
   app.get('/sign_up', function(request, response) {
     response.render('./users/sign_up');
@@ -28,9 +28,25 @@ module.exports = function(app, fs) {
     var user_pwd = request.body.user_pwd;
     var user_pwd_confirm = request.body.user_pwd_confirm;
 
+    // 입력된 비밀번호 확인
+    if (user_pwd != user_pwd_confirm) {
+      // response.status(401).send("pwd_check");
+      // throw new Error("check pwd");
+      response.json({message: "check password"});
+      return;
+    }
+
+
+    // 사용자 메일 중복 체크
+    // var sql = "select count(*) from users where user_email = ?";
+    // connection.query(sql, user_email, function(error, result) {
+    //   if (error) throw error;
+    // });
+
+
+    // 사용자 저장
     var sql = "insert into users (user_email, user_pwd) values ?";
     var values = [[user_email, user_pwd]];
-
     connection.query(sql, [values], function(error, result) {
       if (error) throw error;
       response.redirect('/');
