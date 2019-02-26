@@ -1,19 +1,9 @@
 <!DOCTYPE html>
 <html lane = "en">
-<% include ../common/header.ejs %>
-<!-- <div class="container">
-  <div class="col-md-6">
-    <div id="logbox">
-      <form id = "signup" method = "post" action = "/sign_up">
-        <h1>Create an Account</h1>
-        <input name="user_email" type="email" placeholder="Email address" class="input pass"/>
-        <input name="user_pwd" type="password" placeholder="Choose a password" required="required" class="input pass"/>
-        <input name="user_pwd_confirm" type="password" placeholder="Confirm password" required="required" class="input pass"/>
-        <input type="submit" value="Sign me up!" class="inputButton"/>
-      </form>
-    </div>
-  </div>
-</div> -->
+  <head>
+    <% include ../common/header.ejs %>
+  </head>
+  <body>
     <div class="container col-lg-4">
       <form id="signup" method="post" action="/sign_up">
         <h1>계정 생성</h1>
@@ -32,5 +22,6 @@
         <button type="submit" class="float-right">저장</button>
       </form>
     </div>
+    <% include ../common/header.ejs %>
   </body>
 </html>
