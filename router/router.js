@@ -1,6 +1,7 @@
 var mysql = require('mysql');
 var dbconfig = require('../config/dbconfig.js');
 var connection = mysql.createConnection(dbconfig);
+var crypto = require('../crypto/crypto.js');
 
 connection.connect(function(error) {
   if (error){
@@ -52,9 +53,13 @@ module.exports = function(app, fs) {
     var user_pwd = request.body.user_pwd;
     var user_pwd_confirm = request.body.user_pwd_confirm;
 
+    // 비밀번호 암호화
+    var salt = crypto.salt();
+    var en_user_pwd = crypto.encryption(salt, user_pwd);
+
     // 사용자 저장
-    var sql = "insert into users (user_email, user_pwd) values ?";
-    var values = [[user_email, user_pwd]];
+    var sql = "insert into users (user_email, user_pwd, salt) values ?";
+    var values = [[user_email, en_user_pwd, salt]];
     connection.query(sql, [values], function(error, result) {
       if (error) throw error;
       response.redirect('/');
