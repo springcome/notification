@@ -25,6 +25,10 @@ module.exports = function(app, fs) {
   app.get('/sign_up', function(request, response) {
     response.render('./users/sign_up');
   });
+  //
+  app.get('/sign_in', function(request, response) {
+    response.render('./users/sign_in');
+  });
 
   // 이메일 중복 체크
   app.post('/sign_up/check_email', function(request, response) {

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lane="en">
+  <head>
+    <% include ../common/header.ejs %>
+  </head>
+    <div class="container col-lg-4">
+      <form id="signin" method="post" action="/sign_in">
+        <h1>로그인</h1>
+        <div class="form-group">
+          <label>사용자 계정(이메일)</label>
+          <input type="email" class="form-control" name="user_email" placeholder="이메일을 입력해주세요" />
+        </div>
+        <div class="form-group">
+          <label>비밀번호</label>
+          <input type="password" class="form-control" name="user_pwd" placeholder="비밀번호를 입력해주세요" />
+        </div>
+        <button type="submit" class="float-right">로그인</button>
+      </form>
+      <button id="sign_up" class="float-left">계정생성</button>
+    </div>
+  <body>
+    <% include ../common/footer.ejs %>
+    <script type="text/jscript">
+      $(document).ready(function() {
+        $('#sign_up').click(function() {
+          location.href = '/sign_up';
+        });
+      });
+    </script>
+  </body>
+</html>
