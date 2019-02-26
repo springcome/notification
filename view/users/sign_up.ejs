@@ -9,6 +9,7 @@
         <h1>계정 생성</h1>
         <div class="form-group">
           <label>이메일 주소</label>
+          <label id="email_check"></label>
           <input type="email" class="form-control" name="user_email" placeholder="이메일을 입력하세요." />
         </div>
         <div class="form-group">
@@ -17,11 +18,54 @@
         </div>
         <div class="form-group">
           <label>비밀번호 확인</label>
+          <label id="pwd_check" class="invisible"></label>
           <input type="password" class="form-control" name="user_pwd_confirm" placeholder="비밀번호를 한번더 입력해주세요." />
         </div>
+        <input type="hidden" name="email_duplicate_check" />
         <button type="submit" class="float-right">저장</button>
       </form>
     </div>
     <% include ../common/footer.ejs %>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        // 이메일 중복 체크
+        $(':input[name=user_email]').focusout(function() {
+          var user_email = $(':input[name=user_email]').val();
+          $.ajax({
+            url: '/sign_up/check_email',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+              "user_email": user_email
+            },
+            success: function(result) {
+              if (result.success) {
+                $('#email_check').html('<font color="blue">사용가능한 이메일</font>');
+              } else {
+                $('#email_check').html('<font color="red">' + result.message + '</font>');
+              }
+            }
+          });
+        });
+
+        // 비밀번호 확인 체크
+        $(':input[name=user_pwd_confirm], :input[name=user_pwd]').keyup(function() {
+          var pwd1 = $(':input[name=user_pwd]').val();
+          var pwd2 = $(':input[name=user_pwd_confirm]').val();
+
+          if (pwd2.length == 0) {
+            $('#pwd_check').attr('class', 'invisible');
+          } else {
+            $('#pwd_check').attr('class', 'visible');
+          }
+
+          if (pwd1 != pwd2) {
+            $('#pwd_check').html('<font color="red">비밀번호를 확인해주세요.</font>');
+          } else {
+            $('#pwd_check').html('<font color="blue">비밀번호 확인됨.</font>');
+          }
+        });
+      });
+    </script>
   </body>
 </html>

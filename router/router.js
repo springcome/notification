@@ -18,31 +18,39 @@ module.exports = function(app, fs) {
   });
 
   /*****************************************
-  * Use
+  * User
   *****************************************/
+  // 계정생성 화면으로 이동
   app.get('/sign_up', function(request, response) {
     response.render('./users/sign_up');
   });
+
+  // 이메일 중복 체크
+  app.post('/sign_up/check_email', function(request, response) {
+    var user_email = request.body.user_email;
+
+    var sql = "select count(*) as cnt from users where user_email = " + mysql.escape(user_email);
+    connection.query(sql, function(error, result) {
+      if (error) throw error;
+      if (result.cnt == 0) {
+        response.json({
+          success: true,
+          message: ''
+        });
+      } else {
+        response.json({
+          success: false,
+          message: '이미 사용중인 이메일입니다.'
+        });
+      }
+    });
+  });
+
+  // 사용자 입력 정보 저장 (생성계정 저장)
   app.post('/sign_up', function(request, response) {
     var user_email = request.body.user_email;
     var user_pwd = request.body.user_pwd;
     var user_pwd_confirm = request.body.user_pwd_confirm;
-
-    // 입력된 비밀번호 확인
-    if (user_pwd != user_pwd_confirm) {
-      // response.status(401).send("pwd_check");
-      // throw new Error("check pwd");
-      response.json({message: "check password"});
-      return;
-    }
-
-
-    // 사용자 메일 중복 체크
-    // var sql = "select count(*) from users where user_email = ?";
-    // connection.query(sql, user_email, function(error, result) {
-    //   if (error) throw error;
-    // });
-
 
     // 사용자 저장
     var sql = "insert into users (user_email, user_pwd) values ?";
