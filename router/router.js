@@ -70,6 +70,30 @@ module.exports = function(app, fs) {
     });
   });
 
+  // 로그인 처리
+  app.post('/sign_in', function(request, response) {
+    var user_email = request.body.user_email;
+    var user_pwd = request.body.user_pwd;
+
+    // 사용자 인증
+    var sql = "select salt, user_pwd from users where user_email = ?";
+    connection.query(sql, [user_email], function(error, result) {
+      if (error) throw error;
+      if (result) {
+        var en_user_pwd = result[0].user_pwd;
+        var salt = result[0].salt;
+        var in_user_pwd = crypto.encryption(salt, user_pwd);
+        if (en_user_pwd == in_user_pwd) {
+          response.redirect('/');
+        } else {
+          response.redirect('/sign_in');
+        }
+      } else {
+        response.redirect('/sign_in');
+      }
+    });
+  });
+
   app.get('/lotto', function(request, response) {
     response.render('./lotto/main', {
       title: 'Lotto'
