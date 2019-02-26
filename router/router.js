@@ -29,10 +29,10 @@ module.exports = function(app, fs) {
   app.post('/sign_up/check_email', function(request, response) {
     var user_email = request.body.user_email;
 
-    var sql = "select count(*) as cnt from users where user_email = " + mysql.escape(user_email);
-    connection.query(sql, function(error, result) {
+    var sql = "select count(*) as cnt from users where user_email = ?";
+    connection.query(sql, [user_email], function(error, result) {
       if (error) throw error;
-      if (result.cnt == 0) {
+      if (result[0].cnt == 0) {
         response.json({
           success: true,
           message: ''
