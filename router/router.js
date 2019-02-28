@@ -12,7 +12,8 @@ connection.connect(function(error) {
 });
 
 module.exports = function(app, fs, session) {
-  var user_router = require('./user_router.js') (app, fs, session, connection, crypto);
+  // 계정생성 및 로그인 Router
+  require('./user_router.js') (app, fs, session, connection, crypto);
 
   app.get('/', function(request, response) {
     if (request.session.is_login) {
@@ -22,23 +23,5 @@ module.exports = function(app, fs, session) {
     } else {
       response.redirect('/sign_in');
     }
-  });
-
-  app.get('/lotto', function(request, response) {
-    response.render('./lotto/main', {
-      title: 'Lotto'
-    });
-  });
-
-  app.get('/list', function(request, response) {
-    var sql = 'select * from users';
-    connection.query(sql, function(error, result, fileds) {
-      if (error) {
-        response.status(500);
-        response.json({success: false, message: result});
-      } else {
-        response.json({success: true, data: result});
-      }
-    });
   });
 }
