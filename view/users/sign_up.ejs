@@ -2,30 +2,6 @@
 <html lane = "en">
   <head>
     <% include ../common/header.ejs %>
-  </head>
-  <body>
-    <div class="container col-lg-4">
-      <form id="signup" method="post" action="/sign_up">
-        <h1>계정 생성</h1>
-        <div class="form-group">
-          <label>이메일 주소</label>
-          <label id="email_check"></label>
-          <input type="email" class="form-control" name="user_email" placeholder="이메일을 입력하세요." />
-        </div>
-        <div class="form-group">
-          <label>비밀번호</label>
-          <input type="password" class="form-control" name="user_pwd" placeholder="비밀번호를 입력하세요." />
-        </div>
-        <div class="form-group">
-          <label>비밀번호 확인</label>
-          <label id="pwd_check" class="invisible"></label>
-          <input type="password" class="form-control" name="user_pwd_confirm" placeholder="비밀번호를 한번더 입력해주세요." />
-        </div>
-        <input type="hidden" name="email_duplicate_check" />
-        <button type="submit" class="float-right">저장</button>
-      </form>
-    </div>
-    <% include ../common/footer.ejs %>
     <script type="text/javascript">
       $(document).ready(function() {
         // 이메일 중복 체크
@@ -67,5 +43,28 @@
         });
       });
     </script>
+  </head>
+  <body>
+    <div class="container col-lg-4">
+      <form id="signup" method="post" action="/sign_up">
+        <h1>계정 생성</h1>
+        <div class="form-group">
+          <label>이메일 주소</label>
+          <label id="email_check"></label>
+          <input type="email" class="form-control" name="user_email" placeholder="이메일을 입력하세요." />
+        </div>
+        <div class="form-group">
+          <label>비밀번호</label>
+          <input type="password" class="form-control" name="user_pwd" placeholder="비밀번호를 입력하세요." />
+        </div>
+        <div class="form-group">
+          <label>비밀번호 확인</label>
+          <label id="pwd_check" class="invisible"></label>
+          <input type="password" class="form-control" name="user_pwd_confirm" placeholder="비밀번호를 한번더 입력해주세요." />
+        </div>
+        <input type="hidden" name="email_duplicate_check" />
+        <button type="submit" class="float-right">저장</button>
+      </form>
+    </div>
   </body>
 </html>

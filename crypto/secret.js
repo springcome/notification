@@ -1,3 +1,3 @@
-exports.secret = {
-  key: '##@@SPRING_SIGN@@##'
+module.exports = {
+  secret: '##@@SPRING_SIGN@@##'
 };

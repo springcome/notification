@@ -76,4 +76,13 @@ module.exports = function(app, fs, session, connection, crypto) {
       }
     });
   });
+
+  // 로그아웃 처리
+  app.get('/logout', function(request, response) {
+    delete request.session.is_login;
+    delete request.session.email;
+    request.session.save(function(){
+      response.redirect('/');
+    });
+  });
 };

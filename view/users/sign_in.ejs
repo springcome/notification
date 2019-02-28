@@ -2,7 +2,15 @@
 <html lane="en">
   <head>
     <% include ../common/header.ejs %>
+    <script type="text/jscript">
+      $(document).ready(function() {
+        $('#sign_up').click(function() {
+          location.href = '/sign_up';
+        });
+      });
+    </script>
   </head>
+  <body>
     <div class="container col-lg-4">
       <form id="signin" method="post" action="/sign_in">
         <h1>로그인</h1>
@@ -18,14 +26,5 @@
       </form>
       <button id="sign_up" class="float-left">계정생성</button>
     </div>
-  <body>
-    <% include ../common/footer.ejs %>
-    <script type="text/jscript">
-      $(document).ready(function() {
-        $('#sign_up').click(function() {
-          location.href = '/sign_up';
-        });
-      });
-    </script>
   </body>
 </html>
