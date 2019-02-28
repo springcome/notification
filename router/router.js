@@ -11,11 +11,15 @@ connection.connect(function(error) {
   }
 });
 
-module.exports = function(app, fs) {
+module.exports = function(app, fs, session) {
   app.get('/', function(request, response) {
-    response.render('index', {
-      title: 'Lama-API'
-    });
+    if (request.session.is_login) {
+      response.render('index', {
+        user_email: request.session.email
+      });
+    } else {
+      response.redirect('/sign_in');
+    }
   });
 
   /*****************************************
@@ -84,6 +88,8 @@ module.exports = function(app, fs) {
         var salt = result[0].salt;
         var in_user_pwd = crypto.encryption(salt, user_pwd);
         if (en_user_pwd == in_user_pwd) {
+          request.session.is_login = true;
+          request.session.email = user_email;
           response.redirect('/');
         } else {
           response.redirect('/sign_in');
