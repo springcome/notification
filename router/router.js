@@ -70,6 +70,9 @@ module.exports = function(app, fs, session) {
     var values = [[user_email, en_user_pwd, salt]];
     connection.query(sql, [values], function(error, result) {
       if (error) throw error;
+
+      request.session.is_login = true;
+      request.session.email = user_email;
       response.redirect('/');
     });
   });
